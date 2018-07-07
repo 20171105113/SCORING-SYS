@@ -20,12 +20,13 @@ int main()
 	
 	
 	int n=-1;/*记录学生人数 */
-	int i=0,j=0;
+	int i=0,j=0,l=0;
 	int a[10][10];	
 	string stu[13][100];
 	int judge[6][100];
 	int score[100];
 	int jud[10];
+	double sum[100]; 
 	
 	
 ifstream fin("C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS/studentdata.csv");
@@ -58,6 +59,7 @@ while (getline(sin, field, ','))
   n++;
 }
 //读取CSV文件中的数据 
+
 cout<<n<<endl;
 
 for(i=0;i<n;i++)
@@ -67,15 +69,49 @@ for(i=0;i<n;i++)
 	stringstream aa;
 	aa<<stu[j+6][i+1];
 	aa>>a[i][j];
-	cout<<a[i][j];
-	cout<<"~"<<endl;
+//	cout<<a[i][j];
+//	cout<<"~"<<endl;
 	}
 cout<<endl;
 }
 //将string类型数据转换成int类型 
 
+for(l=0;l<n;l++)
+{
+	for (i=0;i<5-1;i++)
+		for (j=0;j<5-i-1;j++)
+		{
+			if (a[l][j]<a[l][j+1])
+			{
+				int temp;
+				temp=a[l][j];
+				a[l][j]=a[l][j+1];
+				a[l][j+1]=temp;
+			}
+		}
+}
+//for(i=0;i<5;i++)
+//{
+//	cout<<a[0][i]<<endl;
+//}
+//for(i=0;i<5;i++)
+//{
+//	cout<<a[1][i]<<endl;
+//}
+//  冒泡排序将裁判给每个人的成绩进行从大到小排序
 
+for(i=0;i<n;i++)
+{
+    sum[i]=0;
+	for(j=1;j<5-1;j++)
+ {
+	
+	sum[i]=sum[i]+a[i][j];
+ }
+ sum[i]=sum[i]/3;
+}
+//cout<<sum[0]<<" "<<sum[1]<<endl;
+//得到每个同学的去掉一个最高分和一个最低分最后的得分 
 
-//  冒泡排序得出排名 
     return 0;
 }
