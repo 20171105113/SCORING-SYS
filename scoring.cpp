@@ -26,7 +26,7 @@ int main()
 	int judge[6][100];
 	int score[100];
 	int jud[10];
-	double sum[100]; 
+	double sum[100][100]; 
 	
 	
 ifstream fin("C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS/studentdata.csv");
@@ -79,6 +79,7 @@ cout<<endl;
 for(l=0;l<n;l++)
 {
 	for (i=0;i<5-1;i++)
+	{
 		for (j=0;j<5-i-1;j++)
 		{
 			if (a[l][j]<a[l][j+1])
@@ -89,6 +90,8 @@ for(l=0;l<n;l++)
 				a[l][j+1]=temp;
 			}
 		}
+	}
+
 }
 //for(i=0;i<5;i++)
 //{
@@ -102,16 +105,58 @@ for(l=0;l<n;l++)
 
 for(i=0;i<n;i++)
 {
-    sum[i]=0;
+    sum[i][i]=0;
 	for(j=1;j<5-1;j++)
  {
 	
-	sum[i]=sum[i]+a[i][j];
+	sum[i][i]=sum[i][i]+a[i][j];
  }
- sum[i]=sum[i]/3;
+ sum[i][i]=sum[i][i]/3;
 }
-//cout<<sum[0]<<" "<<sum[1]<<endl;
+cout<<sum[0][0]<<" "<<sum[1][1]<<endl;
 //得到每个同学的去掉一个最高分和一个最低分最后的得分 
+
+
+double temp=0;
+double sum1[100][100];
+double sum3[100][100];
+for(i=0;i<n;i++)
+{
+	sum1[0][i]=sum[i][i];
+} 
+
+			for (j=0;j<n-i-1;j++)
+		{
+			if (sum1[0][j]<sum1[0][j+1])
+			{
+				temp=sum1[l][j];
+				sum1[0][j]=sum1[0][j+1];
+				sum1[0][j+1]=temp;
+			}
+		}
+
+for(i=0;i<n;i++)
+{
+
+for(j=0;j<n;j++)
+{
+	if(sum[i][i]==sum1[0][j])
+	{
+		sum3[i][j]=sum1[0][j];
+	}
+}
+}
+//将最终分数做上初始顺序和排名顺序标记，用于最后的写入文件 
+//for(i=0;i<n;i++)
+//{
+//	for(j=0;j<n;j++)
+//	{
+//		cout<<sum3[i][j]<<"~~~";
+//	}
+//	cout<<endl;
+//}
+
+
 
     return 0;
 }
