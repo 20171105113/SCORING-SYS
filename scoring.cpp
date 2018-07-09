@@ -5,23 +5,26 @@
 #include <vector>
 #include <cstdlib>
 using namespace std;
+
 string Trim(string& str)
 {
  str.erase(0,str.find_first_not_of(" \t\r\n"));
  str.erase(str.find_last_not_of(" \t\r\n") + 1);
  return str;
 }
+//去掉string字符串首尾的空格\t\r\n 
 
 int main()
 {
 	int n=-1;        //记录学生人数,因需要从行名（num,name,sex,dob等）开始记数，所以从-1开始计数
 	int i=0,j=0,l=0; //循环控制变量
-	int a[10][10];	
-	int judge[6][100];
-	int score[100];
-	int jud[10];
-	double sum[100][100]; 
- 	string stu[13][100]; 
+	int a[10][10];	 //用于每个人成绩的排序 
+	double temp=0;
+	double sum[100][100]; //sum，sum1,sum2,sum3分数数据 
+    double sum1[100][100];
+    double sum2[100][100];
+    double sum3[100];
+ 	string stu[13][100];  //stu,stu1,stu2学生信息 
 	string stu1[13][100];
 	string stu2[13][100];
 	
@@ -29,35 +32,30 @@ ifstream fin("C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS/studentdata.csv"); //
 string line; 
 while (getline(fin, line)) 
 {
-
-  istringstream sin(line); 
-  vector<string> fields; 
-  string field;
-while (getline(sin, field, ',')) 
-{
-   fields.push_back(field); 
+    istringstream sin(line); 
+    vector<string> fields; 
+    string field;
+    while (getline(sin, field, ',')) 
+    {
+    fields.push_back(field); 
+    }
+    stu[0][i] = Trim(fields[0]); 
+    stu[1][i] = Trim(fields[1]); 
+    stu[2][i] = Trim(fields[2]); 
+    stu[3][i] = Trim(fields[3]);
+    stu[4][i] = Trim(fields[4]);
+    stu[5][i] = Trim(fields[5]);
+    stu[6][i] = Trim(fields[6]);
+    stu[7][i] = Trim(fields[7]);
+    stu[8][i] = Trim(fields[8]);
+    stu[9][i] = Trim(fields[9]);
+    stu[10][i] = Trim(fields[10]); 
+    i++;
+    j++;
+    n++;
 }
-
-  stu[0][i] = Trim(fields[0]); 
-  stu[1][i] = Trim(fields[1]); 
-  stu[2][i] = Trim(fields[2]); 
-  stu[3][i] = Trim(fields[3]);
-  stu[4][i] = Trim(fields[4]);
-  stu[5][i] = Trim(fields[5]);
-  stu[6][i] = Trim(fields[6]);
-  stu[7][i] = Trim(fields[7]);
-  stu[8][i] = Trim(fields[8]);
-  stu[9][i] = Trim(fields[9]);
-  stu[10][i] = Trim(fields[10]);
-//  cout <<  stu[0][i] << "\t" <<  stu[1][i] << "\t" <<  stu[2][i] << "\t" <<  stu[3][i] << "\t" <<  stu[4][i] <<"\t"<<stu[5][i]<<"\t"<<stu[10][i]<<endl;
-  i++;
-  j++;
-  n++;
-}
-//读取CSV文件中的数据 
-
-//cout<<n<<endl;
-
+//读取CSV文件中的数据并保存到字符串二维数组stu中
+ 
 for(i=0;i<n;i++)
 {
 	for(j=0;j<5;j++)
@@ -65,10 +63,7 @@ for(i=0;i<n;i++)
 	stringstream aa;
 	aa<<stu[j+6][i+1];
 	aa>>a[i][j];
-//	cout<<a[i][j];
-//	cout<<"~"<<endl;
 	}
-//	cout<<endl;
 }
 //将string类型数据转换成int类型 
 
@@ -89,46 +84,25 @@ for(l=0;l<n;l++)
 	}
 
 }
-//for(i=0;i<5;i++)
-//{
-//	cout<<a[0][i]<<endl;
-//}
-//for(i=0;i<5;i++)
-//{
-//	cout<<a[1][i]<<endl;
-//}
 //  冒泡排序将裁判给每个人的成绩进行从大到小排序
 
 for(i=0;i<n;i++)
 {
     sum[i][i]=0;
 	for(j=1;j<5-1;j++)
- {
-	
+    {
 	sum[i][i]=sum[i][i]+a[i][j];
- }
+    }
  sum[i][i]=sum[i][i]/3;
 }
-
-//for(i=0;i<n;i++)
-//{
-//	for(j=0;j<n;j++)
-//	{
-//		cout<<sum[i][j]<<"~~~";
-//	}
-//	cout<<endl;
-//}cout<<endl;
 //得到每个同学的去掉一个最高分和一个最低分最后的得分 
 
-
-double temp=0;
-double sum1[100][100];
-double sum2[100][100];
-double sum3[100];
 for(i=0;i<n;i++)
 {
 	sum1[0][i]=sum[i][i];
-} 
+}
+//将sum中数据存到sum1中用于之后的处理 
+
 for(i=0;i<n-1;i++)
 {
 	for (j=0;j<n-i-1;j++)
@@ -141,39 +115,17 @@ for(i=0;i<n-1;i++)
 		}
 	}
 }
-
-//
-//for(i=0;i<n;i++)
-//{
-//	for(j=0;j<n;j++)
-//	{
-//		cout<<sum1[i][j]<<"~~~";
-//	}
-//	cout<<endl;
-//}cout<<endl;
-
-
 for(i=0;i<n;i++)
 {
-
-for(j=0;j<n;j++)
-{
-	if(sum[i][i]==sum1[0][j])
-	{
+    for(j=0;j<n;j++)
+    {
+	    if(sum[i][i]==sum1[0][j])
+	   {
 		sum2[i][j]=sum1[0][j];
-	}
+	   }
+    }
 }
-}
-//将最终分数做上初始顺序和排名顺序标记，用于最后的写入文件 
-//for(i=0;i<n;i++)
-//{
-//	for(j=0;j<n;j++)
-//	{
-//		cout<<sum2[i][j]<<"~~~";
-//	}
-//	cout<<endl;
-//}cout<<endl;
-
+//将sum数据进行标记为sum2[最后成绩排名][初始排名]
 
 for(i=0;i<n;i++)
 {
@@ -185,8 +137,6 @@ for(i=0;i<n;i++)
 		}
 	};
 }
-
-
 for(i=0;i<n;i++)
 {
 	for(j=0;j<n;j++)
@@ -202,27 +152,14 @@ for(i=0;i<n;i++)
 		}
 	}
 }
-//
-//for(i=0;i<n;i++)
-//{
-//cout<<stu1[0][i+1]<<" "<<stu1[1][i+1]<<" "<<stu1[2][i+1]<<" "<<stu1[3][i+1]<<" "<<stu1[4][i+1]<<" "<<stu1[5][i+1]<<" "<<endl;
-//}
-//
+//利用上面sum2[最后成绩排名][初始排名]对stu的学生信息按成绩排名顺序赋值到stu2上 
 
 ofstream ofile;
-
-ofile.open("C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS/studentdataout.csv",ios::out | ios::trunc);
-//判断.csv文件是否存在，不存在则建立
-
-ofile<<"Number,Name,Sex,Date of birth,Major,Phone number,Final score"<<endl;                                                                                                                                           
-
-
-
+ofile.open("C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS/studentdataout.csv",ios::out | ios::trunc);//判断studentdataout.csv文件是否存在，不存在则建立
+ofile<<"Number,Name,Sex,Date of birth,Major,Phone number,Final score"<<endl;   //行名                                                                                                                                     
 for(i=0;i<=n-1;i++)
-
 {
-
-          ofile<<stu1[0][i+1];
+    ofile<<stu1[0][i+1];
     for(j=1;j<=5;j++)
     {
            ofile<<","<<stu1[j][i+1];
@@ -230,7 +167,9 @@ for(i=0;i<=n-1;i++)
     ofile<<","<<sum3[i];
     ofile<<endl; 
 }
-ofile.close();
-cout<<"数据已处理，表格文件已保存,请到 C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS 目录下查看"<<endl; 
+//将学生信息和最后成绩按成绩从高到低写入文件 
+
+ofile.close();//关闭文件 
+cout<<"数据已处理，表格文件已保存，请到 C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS 目录下查看"<<endl; 
     return 0;
 }
