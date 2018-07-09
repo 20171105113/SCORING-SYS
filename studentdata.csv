@@ -1,3 +1,11 @@
 num,name,sex,dob,major,pnum,judge1,judge2,judge3,judge4,judge5
-2017110001,ZhangSan,male,19990107,17Network programming class,13704718001,85,90,92,91,96 
-2017110002,Limei,female,19990802,17Network programming class,13704718007,90,96,93,95,93 
+2017110001,ZhangSan,male,19990107,17Network programming class,13704718001,85,90,91,91,96
+2017110002,Limei,female,19990802,17Network programming class,13704718007,90,96,93,95,93
+2017110003,WangQiang,male,19980816,17Network programming class,13789654236,92,98,95,91,95
+2017110004,ZhangLiang,male,19980518,17Network programming class,15598563254,76,78,82,90,82
+2017110005,Victor,male,19981217,17Network programming class,13699863655,80,76,82,90,82
+2017110006,Mike,male,19980921,17Network programming class,18985633625,81,83,81,90,83
+2017110007,Lily,female,19990216,17Network programming class,17978635522,86,85,87,95,85
+2017110008,Anne,female,19990305,17Network programming class,13998788563,90,93,83,97,95
+2017110009,Leon,male,19970910,17Network programming class,15332569965,76,77,82,90,76
+2017110010,Alice,female,19980423,17Network programming class,15512356688,80,95,82,96,82
