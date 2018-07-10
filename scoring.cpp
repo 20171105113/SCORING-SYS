@@ -3,7 +3,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cstdlib>
 using namespace std;
 
 string Trim(string& str)
@@ -49,7 +48,7 @@ while (getline(fin, line))
     stu[7][i] = Trim(fields[7]);
     stu[8][i] = Trim(fields[8]);
     stu[9][i] = Trim(fields[9]);
-    stu[10][i] = Trim(fields[10]); 
+    stu[10][i] = Trim(fields[10]);
     i++;
     j++;
     n++;
@@ -170,6 +169,6 @@ for(i=0;i<=n-1;i++)
 //将学生信息和最后成绩按成绩从高到低写入文件 
 
 ofile.close();//关闭文件 
-cout<<"数据已处理，表格文件已保存，请到 C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS 目录下查看"<<endl; 
+cout<<endl<<"数据已处理，表格文件已保存，请到 C:/Users/LXH/Desktop/SCORING SYS/SCORING-SYS 目录下查看"<<endl; 
     return 0;
 }
